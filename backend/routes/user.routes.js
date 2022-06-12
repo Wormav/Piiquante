@@ -1,9 +1,12 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
+const userCtrl = require('../controllers/user.controllers')
 
-const userCtrl = require('../controllers/user.controllers');
+// routes /API/AUTH
 
 router.post('/signup', userCtrl.signup);
-router.post('/login', userCtrl.login);
+router.post('/login', userCtrl.login)
 
-module.exports = router;
+
+// export for index routes 
+
+module.exports = router

@@ -1,35 +1,37 @@
-const express = require("express");
-const mongoose = require('mongoose')
+const express = require('express');
+const path = require('path');
+const routing = require('./routes');
 
-const userRoutes = require('./routes/user.routes')
-const sauceRoutes = require('./routes/sauce.routes')
+// Initialise express
 
 const app = express();
 
+// Connection à la database
 
-mongoose.connect(
-    'mongodb+srv://Wormav:qwe@cluster0.tl7kw.mongodb.net/Piiquante?retryWrites=true&w=majority',
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
-  .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() => console.log("Connexion à MongoDB échouée !"));
+require('./config/database.config');
 
-app.use(express.json());
+// hearder pour les reponses
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  );
-  next();
-});
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
+    );
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    next();
+  });
 
-app.use('/api/auth/', userRoutes);
-app.use('/api/' , sauceRoutes)
+  // middleware généreaux
 
-module.exports = app;
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// route pour '/api'
+
+app.use('/api', routing)
+
+// export l'app pour le serveur
+
+module.exports = app
