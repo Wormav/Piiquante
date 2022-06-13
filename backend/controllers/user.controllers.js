@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const userQueries = require("../queries/user.queries");
 
@@ -29,7 +29,7 @@ exports.login = async (req, res) => {
       return res.status(200).json({
         userId: user._id.toString(),
         token: jwt.sign(
-            { userId: user._id },
+            { userId: user._id.toString() },
             "j4wijDRbSvePYSVTibirnTp3oWmlanOInyl1rAukGG55uEz234gIXWatrNqghnEoxtJPlh69",
             { expiresIn: "24h" }
           ),
