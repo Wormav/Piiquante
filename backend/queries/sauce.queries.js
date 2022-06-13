@@ -17,4 +17,4 @@ exports.addSauce = (sauceObj) => {
 
 // trouve une sauce avec son Id et la modifie 
 
-exports.findSauceByIdAndUpdate = (sauceId, update) => Sauce.findOneAndUpdate({sauceId} , update).exec()
+exports.findSauceByIdAndUpdate = (sauceId, update) => Sauce.findByIdAndUpdate(sauceId , update).exec()

@@ -1,6 +1,7 @@
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const { random } = require('../utils/ramdom')
 
 // Configuration nom de fichiers et dossiers
 
@@ -10,7 +11,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const extension = path.extname(file.originalname);
-    const newFilename = `${Date.now()}${file.originalname}${extension}`;
+    const newFilename = `${Date.now()}-${random(1000, 9999)}${extension}`;
     cb(null, newFilename);
   },
 });
