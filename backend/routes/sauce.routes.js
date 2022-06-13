@@ -5,6 +5,8 @@ const saucesCtrl = require('../controllers/sauce.controllers');
 // route /API/SAUCES
 
 router.get('/', saucesCtrl.getAllSauces)
+router.get('/:id', saucesCtrl.getOneSauce)
 router.post('/',sauceImgStorage, saucesCtrl.createSauce)
+
 
 module.exports = router

@@ -4,6 +4,10 @@ const Sauce = require("../models/sauce.model");
 
 exports.findAllSauces = () => Sauce.find({}).exec();
 
+// Cherche une sauces avec son ID
+ 
+exports.findSauceById = (sauceId) => Sauce.findOne(sauceId).exec();
+
 // Créé et sauvegarde nouvelle sauce dans database
 
 exports.addSauce = (sauceObj) => {

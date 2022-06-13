@@ -12,6 +12,19 @@ exports.getAllSauces = async (req, res) => {
   }
 };
 
+// Renvoi une sauce avec son Id
+
+exports.getOneSauce = async (req, res) => {
+  try {
+    const sauceId = req.params.id;
+    const sauce = await sauceQueries.findSauceById({sauceId})
+    if(!sauce) return res.status(401).json({ message: `Cette sauce n'existe pas` })
+    return res.status(200).json(sauce)
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
 // Créé et sauvegarde une sauce
 
 exports.createSauce = async (req, res) => {
