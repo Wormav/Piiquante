@@ -5,7 +5,6 @@ const Sauce = require("../models/sauce.model");
 exports.findAllSauces = () => Sauce.find({}).exec();
 
 // Cherche une sauces avec son ID
- 
 exports.findSauceById = (sauceId) => Sauce.findById(sauceId).exec();
 
 // Créé et sauvegarde nouvelle sauce dans database
@@ -15,6 +14,11 @@ exports.addSauce = (sauceObj) => {
   return newSauce.save();
 };
 
-// trouve une sauce avec son Id et la modifie 
+// trouve une sauce avec son Id et la modifie
 
-exports.findSauceByIdAndUpdate = (sauceId, update) => Sauce.findByIdAndUpdate(sauceId , update).exec()
+exports.updateSauceById = (sauceId, update) =>
+  Sauce.findByIdAndUpdate(sauceId, update).exec();
+
+// trouve une sauce avec son Id et la supprime
+
+exports.deleteSauceById = (sauceId) => Sauce.findByIdAndDelete(sauceId).exec();
