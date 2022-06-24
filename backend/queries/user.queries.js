@@ -10,3 +10,7 @@ exports.createUser = (email, hashedPassword) => {
 // Trouve un utilisateur avec un email
 
 exports.findUserByEmail = (email) => User.findOne({ email }).exec();
+
+// Trouve un utilisateur avec son Id
+
+exports.findUserById = (id) => User.findOne({_id : id}).exec()
