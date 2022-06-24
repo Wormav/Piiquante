@@ -9,8 +9,8 @@ const likeCtrl = require('../controllers/likes.controller')
 router.get("/", securityCtrl.authenticated, saucesCtrl.getAllSauces);
 router.get("/:id", securityCtrl.authenticated, saucesCtrl.getOneSauce);
 router.post("/", securityCtrl.authenticated, sauceImgStorage, saucesCtrl.createSauce);
-router.put("/:id", securityCtrl.authenticated, sauceImgStorage , saucesCtrl.modifySauce);
-router.delete('/:id', securityCtrl.authenticated, saucesCtrl.deleteSauce)
+router.put("/:id", securityCtrl.authenticated, securityCtrl.ensureUserIsOwerOfTheSauce, sauceImgStorage , saucesCtrl.modifySauce);
+router.delete('/:id', securityCtrl.authenticated, securityCtrl.ensureUserIsOwerOfTheSauce, saucesCtrl.deleteSauce)
 router.post("/:id/like", securityCtrl.authenticated, likeCtrl.likeSauce)
 
 module.exports = router;
