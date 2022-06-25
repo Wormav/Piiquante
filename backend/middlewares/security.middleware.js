@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const userQueries = require("../queries/user.queries");
 const sauceQueries = require("../queries/sauce.queries");
+const envDev = require("../environment/development");
 
 // Pour être sur que l'utilistateur est connecté
 
@@ -9,7 +10,7 @@ exports.authenticated = async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decoToken = jwt.verify(
       token,
-      "j4wijDRbSvePYSVTibirnTp3oWmlanOInyl1rAukGG55uEz234gIXWatrNqghnEoxtJPlh69"
+      envDev.jwtSecret
     );
     const user = await userQueries.findUserById(decoToken.userId);
     if (!user)

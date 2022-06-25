@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const userQueries = require("../queries/user.queries");
+const envDev = require("../environment/development");
 
 // Crée un nouvelle utilisateur
 
@@ -30,7 +31,7 @@ exports.login = async (req, res) => {
         userId: user._id.toString(),
         token: jwt.sign(
             { userId: user._id.toString() },
-            "j4wijDRbSvePYSVTibirnTp3oWmlanOInyl1rAukGG55uEz234gIXWatrNqghnEoxtJPlh69",
+            envDev.jwtSecret,
             { expiresIn: "24h" }
           ),
       });
